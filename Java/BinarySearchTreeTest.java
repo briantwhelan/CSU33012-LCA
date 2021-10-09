@@ -63,6 +63,53 @@ public class BinarySearchTreeTest
   	    assertEquals("\"Testing put(Key key, Value value)\"",
   			            "(((()1(()2()))3((()4(()5()))6()))7())", binarySearchTree.printKeysInOrder());
 	}
+	
+	/**
+     * Test {@code delete(Key key)} 
+     */
+    @Test
+    public void testDelete() 
+    {
+        BinarySearchTree<Integer, Integer> binarySearchTree = new BinarySearchTree<Integer, Integer>();
+        
+        binarySearchTree.delete(1);
+        assertEquals("Testing delete(Key key)", "()", binarySearchTree.printKeysInOrder());
+        binarySearchTree.put(7, 7);   //        _7_
+        binarySearchTree.put(8, 8);   //      /     \
+        binarySearchTree.put(3, 3);   //    _3_      8
+        binarySearchTree.put(1, 1);   //  /     \
+        binarySearchTree.put(2, 2);   // 1       6
+        binarySearchTree.put(6, 6);   //  \     /
+        binarySearchTree.put(4, 4);   //   2   4
+        binarySearchTree.put(5, 5);   //        \
+                         			  //         5           
+        binarySearchTree.delete(9);
+        assertEquals("Testing delete(Key key)",
+                "(((()1(()2()))3((()4(()5()))6()))7(()8()))", binarySearchTree.printKeysInOrder());
+        binarySearchTree.delete(8);
+        assertEquals("Testing delete(Key key)", "(((()1(()2()))3((()4(()5()))6()))7())", binarySearchTree.printKeysInOrder());
+        binarySearchTree.delete(6);
+        assertEquals("Testing delete(Key key)",
+                "(((()1(()2()))3(()4(()5())))7())", binarySearchTree.printKeysInOrder());
+        binarySearchTree.delete(3);
+        assertEquals("Testing delete(Key key)",
+                "(((()1())2(()4(()5())))7())", binarySearchTree.printKeysInOrder());
+        
+        binarySearchTree = new BinarySearchTree<Integer, Integer>();
+        
+        binarySearchTree.put(7, 7);   //        _7_
+        binarySearchTree.put(8, 8);   //      /     \
+        binarySearchTree.put(3, 3);   //    _3_      8
+        binarySearchTree.put(1, 1);   //  /     \
+        binarySearchTree.put(2, 2);   // 1       6
+        binarySearchTree.put(6, 6);   //  \     /
+        binarySearchTree.put(4, 4);   //   2   4
+        binarySearchTree.put(5, 5);   //        \
+        							  //         5
+        binarySearchTree.delete(1);
+        assertEquals("Testing delete(Key key)",
+                "(((()2())3((()4(()5()))6()))7(()8()))", binarySearchTree.printKeysInOrder());
+    } 
 
     /**
      * Test {@code printKeysInOrder()} 
