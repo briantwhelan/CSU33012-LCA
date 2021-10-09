@@ -120,9 +120,75 @@ public class BinarySearchTree<Key extends Comparable<Key>, Value>
         return node;
     }
 	
-	public void delete(Key key) 
+    /**
+     * Deletes the specified {@code Key} (if it exists) from the {@code BinarySearchTree}.
+     * Uses Hibbard deletion to replace deleted {@code Node} with its predecessor.
+     *
+     * @param key the {@code Key} to delete from the {@code BinarySearchTree}
+     */
+    public void delete(Key key) 
     {
-
+    	if(root != null)
+    	{
+    	    root = delete(root, key);
+    	}
+    }
+    
+    /**
+     * (Recursively) Deletes the specified {@code Key} (if it exists) from the {@code BinarySearchTree} rooted at the specified {@code Node}.
+     * Uses Hibbard deletion to replace deleted {@code Node} with its predecessor.
+     *
+     * @param node the root {@code Node}
+     * @param key the {@code Key} to delete from the {@code BinarySearchTree} rooted at {@code node}
+     * @return the {@code Node} that has been updated
+     */
+    private Node delete(Node node, Key key)
+    { 
+    	Node updatedNode = null;
+    	if(node == null) 
+    	{
+    	    updatedNode = null;
+    	}
+    	else
+    	{
+	        int cmp = key.compareTo(node.key);
+	        if(cmp < 0) 
+	        {
+	    	    node.left = delete(node.left, key);
+	    	    node.size = size(node.left) + size(node.right) + 1;
+	    	    updatedNode = node;
+	        }
+	        else if(cmp > 0) 
+	        {
+	    	    node.right = delete(node.right, key);
+	    	    node.size = size(node.left) + size(node.right) + 1;
+	    	    updatedNode = node;
+	        }
+	        else 
+	        {
+	            if(node.right == null) 
+	            {
+	        	    updatedNode = node.left;
+	            }
+	            else if(node.left == null)
+	            {
+	        	    updatedNode = node.right;
+	            }
+	            else
+	            {
+		            Node temp = node;
+		            node = max(temp.left);
+		            node.left = deleteMax(temp.left);
+		            node.right = temp.right;
+		            node.size = size(node.left) + size(node.right) + 1;
+		    	    updatedNode = node;
+	            }
+	        }
+        }
+    	
+    	return updatedNode;
+    }
+    
     /**
      * Deletes the maximum {@code Key} (if it exists) from the {@code BinarySearchTree}.
      */
