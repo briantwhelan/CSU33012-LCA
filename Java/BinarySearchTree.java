@@ -123,6 +123,14 @@ public class BinarySearchTree<Key extends Comparable<Key>, Value>
 	public void delete(Key key) 
     {
 
+    public void deleteMax() 
+    {
+    }
+    public Value max() 
+    {
+    	Value max = null;
+    	
+    	return max;
     }
 
      /**

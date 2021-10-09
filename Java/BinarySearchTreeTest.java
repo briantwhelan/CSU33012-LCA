@@ -110,6 +110,53 @@ public class BinarySearchTreeTest
         assertEquals("Testing delete(Key key)",
                 "(((()2())3((()4(()5()))6()))7(()8()))", binarySearchTree.printKeysInOrder());
     } 
+	
+	    /**
+     * Test {@code deleteMax()} 
+     */
+	@Test
+	public void testDeleteMax()
+	{
+		BinarySearchTree<Integer, Integer> binarySearchTree = new BinarySearchTree<Integer, Integer>();
+		
+		binarySearchTree.deleteMax();
+		assertEquals("Testing deleteMax()", "()", binarySearchTree.printKeysInOrder());
+  		binarySearchTree.put(7, 7);   //        _7_
+  		binarySearchTree.put(8, 8);   //      /     \
+  		binarySearchTree.put(3, 3);   //    _3_      8
+  		binarySearchTree.put(1, 1);   //  /     \    
+  		binarySearchTree.put(2, 2);   // 1       6  
+  		binarySearchTree.put(6, 6);   //  \     /
+  		binarySearchTree.put(4, 4);   //   2   4
+  		binarySearchTree.put(5, 5);   //        \
+  									  //         5
+  		binarySearchTree.deleteMax();
+  		assertEquals("Testing deleteMax()",
+  				"(((()1(()2()))3((()4(()5()))6()))7())", binarySearchTree.printKeysInOrder());
+  		binarySearchTree.deleteMax();
+  		assertEquals("Testing deleteMax()",
+  				"((()1(()2()))3((()4(()5()))6()))", binarySearchTree.printKeysInOrder());
+  		binarySearchTree.deleteMax();
+  		assertEquals("Testing deleteMax()",
+  				"((()1(()2()))3(()4(()5())))", binarySearchTree.printKeysInOrder());
+	}
+	
+	/**
+     * Test {@code max()} 
+     */
+	@Test
+	public void testMax()
+	{
+		BinarySearchTree<Integer, Integer> binarySearchTree = new BinarySearchTree<Integer, Integer>();
+		
+		assertEquals("Testing max()", null, binarySearchTree.max());
+  		binarySearchTree.put(5, 5); 
+  		assertEquals("Testing max()", 5, (int)binarySearchTree.max());
+  		binarySearchTree.put(15, 15);
+  		assertEquals("Testing max()", 15, (int)binarySearchTree.max());
+  		binarySearchTree.put(10, 10); 
+  		assertEquals("Testing max()", 15, (int)binarySearchTree.max());
+	}
 
     /**
      * Test {@code printKeysInOrder()} 
