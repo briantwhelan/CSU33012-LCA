@@ -165,9 +165,49 @@ public class BinarySearchTree<Key extends Comparable<Key>, Value>
     	return keysInOrder;
     }
     
+    /**
+     * Gets the {@code String} representation of the {@code BinarySearchTree}.
+     * 
+     * @return the {@code String} representation of the {@code BinarySearchTree}
+     */
     @Override
     public String toString() 
     {
-	return "";
+    	String string = "";
+    	if(root == null)
+    	{
+    	    string = "-null\n";
+    	}
+    	else
+    	{
+    	    string = toString(root, "");
+    	}
+    	
+    	return string;
+    }
+    
+    /**
+     * (Recursively) Gets the {@code String} representation of the {@code BinarySearchTree} rooted at the specified {@code Node}.
+     *
+     * @param node the root {@code Node}
+     * @param prefix the current {@code String} representation of the {@code BinarySearchTree} rooted at {@code node} 
+     * @return the {@code String} representation of the {@code BinarySearchTree} rooted at {@code node}
+     */
+    private String toString(Node node, String prefix)
+    {
+    	String string = "";
+    	if(node == null)
+    	{
+    	    string = prefix + "-null\n";
+    	}
+    	else
+    	{
+    	    string = prefix + "-" + node.key + "\n"
+    						+ toString(node.left, prefix + " |")  
+    						+ toString(node.right, prefix + "  ");
+    	}
+    	
+    	return string;
     }
 }
+
