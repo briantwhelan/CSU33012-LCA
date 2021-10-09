@@ -78,7 +78,11 @@ public class BinarySearchTree<Key extends Comparable<Key>, Value>
      */
     public void put(Key key, Value value) 
     {
-        if(value != null) 
+        if(value == null)
+        {
+            delete(key);
+        }
+        else
         {
             root = put(root, key, value);
         }
