@@ -123,12 +123,73 @@ public class BinarySearchTree<Key extends Comparable<Key>, Value>
 	public void delete(Key key) 
     {
 
+    /**
+     * Deletes the maximum {@code Key} (if it exists) from the {@code BinarySearchTree}.
+     */
     public void deleteMax() 
     {
+    	if(root != null)
+    	{
+    	    root = deleteMax(root);
+    	}
     }
+    
+    /**
+     * (Recursively) Deletes the maximum {@code Key} (if it exists) from the {@code BinarySearchTree} rooted at the specified {@code Node}.
+     * 
+     * @param node the root {@code Node}
+     * @return the {@code Node} that has been updated
+     */
+    private Node deleteMax(Node node)
+    {
+    	Node updatedNode = null;
+    	if(node.right == null) 
+    	{
+    	    updatedNode = node.left;
+    	}
+    	else
+    	{
+    	    node.right = deleteMax(node.right);
+    	    node.size = 1 + size(node.left) + size(node.right);
+    	    updatedNode = node;
+    	}
+    	
+    	return updatedNode;
+    }
+    
+    /**
+     * Returns the {@code Value} associated with the {@code Node} with the maximum {@code Key} in the {@code BinarySearchTree}.
+     * 
+     * @return the {@code Value} associated with the {@code Node} with the maximum {@code Key} in the {@code BinarySearchTree}
+     */
     public Value max() 
     {
     	Value max = null;
+    	if(root != null)
+    	{
+    	    max = max(root).value;
+    	}
+    	
+    	return max;
+    }
+    
+    /**
+     * (Recursively) Returns the {@code Node} with the maximum {@code Key} in the {@code BinarySearchTree} rooted at the specified {@code Node}.
+     * 
+     * @param node: the root {@code Node}
+     * @return the {@code Node} with the maximum {@code Key} in the {@code BinarySearchTree} rooted at {@code node}
+     */
+    private Node max(Node node)
+    {
+    	Node max;
+    	if(node.right == null) 
+    	{
+    	    max = node;
+    	}
+    	else
+    	{
+    	    max = max(node.right);
+    	}
     	
     	return max;
     }
