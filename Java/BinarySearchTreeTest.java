@@ -111,7 +111,7 @@ public class BinarySearchTreeTest
                 "(((()2())3((()4(()5()))6()))7(()8()))", binarySearchTree.printKeysInOrder());
     } 
 	
-	    /**
+    /**
      * Test {@code deleteMax()} 
      */
 	@Test
@@ -157,6 +157,44 @@ public class BinarySearchTreeTest
   		binarySearchTree.put(10, 10); 
   		assertEquals("Testing max()", 15, (int)binarySearchTree.max());
 	}
+
+    /**
+     * Test {@code lowestCommonAncestor(Key node1, Key node2)}
+     */
+    @Test
+    public void testLowestCommonAncestor()
+    {
+		BinarySearchTree<Integer, Integer> binarySearchTree = new BinarySearchTree<Integer, Integer>();
+		
+        assertEquals("Testing lowestCommonAncestor(Key node1, Key node2)", null, binarySearchTree.lowestCommonAncestor(null, null));
+		assertEquals("Testing lowestCommonAncestor(Key node1, Key node2)", null, binarySearchTree.lowestCommonAncestor(3, 8));
+		binarySearchTree.put(7, 7);   //        _7_
+        binarySearchTree.put(8, 8);   //            \
+        binarySearchTree.put(9, 9);   //             8
+		binarySearchTree.put(10,10);  //			  \
+									  //			   9
+									  //				\
+									  //				10
+		assertEquals("Testing lowestCommonAncestor(Key node1, Key node2)", 8, (int)binarySearchTree.lowestCommonAncestor(8, 10));
+		assertEquals("Testing lowestCommonAncestor(Key node1, Key node2)", 9, (int)binarySearchTree.lowestCommonAncestor(9, 10));
+		
+		
+		binarySearchTree = new BinarySearchTree<Integer, Integer>();
+		
+        binarySearchTree.put(7, 7);   //        _7_
+        binarySearchTree.put(8, 8);   //      /     \
+        binarySearchTree.put(3, 3);   //    _3_      8
+        binarySearchTree.put(1, 1);   //  /     \
+        binarySearchTree.put(2, 2);   // 1       6
+        binarySearchTree.put(6, 6);   //  \     /
+        binarySearchTree.put(4, 4);   //   2   4
+        binarySearchTree.put(5, 5);   //        \
+        							  //         5
+		assertEquals("Testing lowestCommonAncestor(Key node1, Key node2)", 7, (int)binarySearchTree.lowestCommonAncestor(3, 8));
+		assertEquals("Testing lowestCommonAncestor(Key node1, Key node2)", 7, (int)binarySearchTree.lowestCommonAncestor(8, 3));
+		assertEquals("Testing lowestCommonAncestor(Key node1, Key node2)", 7, (int)binarySearchTree.lowestCommonAncestor(2, 8));
+		assertEquals("Testing lowestCommonAncestor(Key node1, Key node2)", 3, (int)binarySearchTree.lowestCommonAncestor(2, 5));
+    }
 
     /**
      * Test {@code printKeysInOrder()} 

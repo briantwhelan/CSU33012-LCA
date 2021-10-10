@@ -263,6 +263,12 @@ public class BinarySearchTree<Key extends Comparable<Key>, Value>
     	
     	return max;
     }
+	public Key lowestCommonAncestor(Key node1, Key node2)
+	{
+		Key lca = null;
+		
+		return lca;
+	}
 
      /**
      * Returns the {@code String} containing all {@code Key} elements in the {@code BinarySearchTree} in-order with parentheses.
