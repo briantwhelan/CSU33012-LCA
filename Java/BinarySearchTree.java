@@ -3,7 +3,7 @@
  *  Adapted from Sedgewick and Wayne's Algorithms Textbook.
  *  @see <a href="https://algs4.cs.princeton.edu/">Algorithms Textbook</a>
  *
- *  @version 09/10/21
+ *  @version 10/10/21
  *
  *  @author Brian Whelan
  *
@@ -19,7 +19,7 @@ public class BinarySearchTree<Key extends Comparable<Key>, Value>
         private Node left, right; 	
         private int size;
 
-		/**
+        /**
          * Creates a {@code Node} with the specified attributes.
          * @param key the {@code Key} to be stored within the {@code Node}
          * @param value the {@code Value} to be associated with {@code key} 
@@ -33,12 +33,12 @@ public class BinarySearchTree<Key extends Comparable<Key>, Value>
         }
     }
     
-	/**
+    /**
      * Creates an empty {@code BinarySearchTree}.
      */
     public BinarySearchTree()
     {
-		root = null;
+        root = null;
     }
 
     /**
@@ -69,7 +69,7 @@ public class BinarySearchTree<Key extends Comparable<Key>, Value>
         return size;
     }
 	
-	/**
+    /**
      *  Puts the specified {@code Key}-{@code Value} pair into the {@code BinarySearchTree}.
      *  If the specified {@code Key} already exists, update its {@code Value}.
      *
@@ -155,42 +155,42 @@ public class BinarySearchTree<Key extends Comparable<Key>, Value>
     	}
     	else
     	{
-	        int cmp = key.compareTo(node.key);
-	        if(cmp < 0) 
-	        {
-	    	    node.left = delete(node.left, key);
-	    	    node.size = size(node.left) + size(node.right) + 1;
-	    	    updatedNode = node;
-	        }
-	        else if(cmp > 0) 
-	        {
-	    	    node.right = delete(node.right, key);
-	    	    node.size = size(node.left) + size(node.right) + 1;
-	    	    updatedNode = node;
-	        }
-	        else 
-	        {
-	            if(node.right == null) 
-	            {
-	        	    updatedNode = node.left;
-	            }
-	            else if(node.left == null)
-	            {
-	        	    updatedNode = node.right;
-	            }
-	            else
-	            {
-		            Node temp = node;
-		            node = max(temp.left);
-		            node.left = deleteMax(temp.left);
-		            node.right = temp.right;
-		            node.size = size(node.left) + size(node.right) + 1;
-		    	    updatedNode = node;
-	            }
-	        }
+            int cmp = key.compareTo(node.key);
+            if(cmp < 0) 
+            {
+                node.left = delete(node.left, key);
+                node.size = size(node.left) + size(node.right) + 1;
+                updatedNode = node;
+            }
+            else if(cmp > 0) 
+            {
+                node.right = delete(node.right, key);
+                node.size = size(node.left) + size(node.right) + 1;
+                updatedNode = node;
+            }
+            else 
+            {
+                if(node.right == null) 
+                {
+                    updatedNode = node.left;
+                }
+                else if(node.left == null)
+                {
+                    updatedNode = node.right;
+                }
+                else
+                {
+                    Node temp = node;
+                    node = max(temp.left);
+                    node.left = deleteMax(temp.left);
+                    node.right = temp.right;
+                    node.size = size(node.left) + size(node.right) + 1;
+                    updatedNode = node;
+                }
+            }
         }
     	
-    	return updatedNode;
+        return updatedNode;
     }
     
     /**
@@ -264,25 +264,25 @@ public class BinarySearchTree<Key extends Comparable<Key>, Value>
     	return max;
     }
 	
-	/**
+    /**
      * Returns the Lowest Common Ancestor of the two specified elements (if they exist) in the {@code BinarySearchTree}.
      *
      * @param node1 the first {@code Node}
      * @param node2 the second {@code Node}
      * @return the {@code Key} corresponding to the Lowest Common Ancestor {@code Node} of {@code node1} and {@code node2} (or {@code null} if no such {@code Node exists})
      */
-	public Key lowestCommonAncestor(Key node1, Key node2)
-	{
-		Key lca = null;
-		if((node1 != null) && (node2 != null))
-		{
-			lca = lowestCommonAncestor(root, node1, node2);
-		}
+    public Key lowestCommonAncestor(Key node1, Key node2)
+    {
+        Key lca = null;
+        if((node1 != null) && (node2 != null))
+        {
+            lca = lowestCommonAncestor(root, node1, node2);
+        }
 		
-		return lca;
-	}
+        return lca;
+    }
 	
-	/**
+    /**
      * (Recursively) Returns the Lowest Common Ancestor of the two specified elements (if they exist) in the {@code BinarySearchTree} rooted at the specified {@code Node}.
      *
      * @param root the root {@code Node}
@@ -290,35 +290,35 @@ public class BinarySearchTree<Key extends Comparable<Key>, Value>
      * @param node2 the second {@code Node}
      * @return the {@code Key} corresponding to the Lowest Common Ancestor {@code Node} of {@code node1} and {@code node2} (or {@code null} if no such {@code Node exists})
      */
-	public Key lowestCommonAncestor(Node node, Key node1, Key node2)
-	{
-		Key lca = null;
+    public Key lowestCommonAncestor(Node node, Key node1, Key node2)
+    {
+        Key lca = null;
         if(node != null)
         {
-	        if(node.key == node1 || node.key == node2)
-	        {
-	        	lca = node.key;
-	        }
-	        else
-	        {
-	        	Key left = lowestCommonAncestor(node.left, node1, node2);
-		        Key right = lowestCommonAncestor(node.right, node1, node2);
+            if(node.key == node1 || node.key == node2)
+            {
+                lca = node.key;
+            }
+            else
+            {
+                Key left = lowestCommonAncestor(node.left, node1, node2);
+                Key right = lowestCommonAncestor(node.right, node1, node2);
 		 
-		        if(left != null && right != null)
-		        {
-		        	lca = node.key;
-		        }
-		        else
-		        {
-		        	lca = (left == null) ? right : left;
-		        }
-	        }
-		}
+                if(left != null && right != null)
+                {
+                    lca = node.key;
+                }
+                else
+                {
+                    lca = (left == null) ? right : left;
+                }
+            }
+        }
 
-		return lca;
-	}
+        return lca;
+    }
 
-     /**
+    /**
      * Returns the {@code String} containing all {@code Key} elements in the {@code BinarySearchTree} in-order with parentheses.
      * That is, for each {@code Node}, the {@code Key} elements in the left subtree appear before the {@code Key} in the {@code Node} 
      * and the {@code Key} elements in the right subtree appear after the {@code Key} in the {@code Node}).
@@ -401,8 +401,8 @@ public class BinarySearchTree<Key extends Comparable<Key>, Value>
     	else
     	{
     	    string = prefix + "-" + node.key + "\n"
-    						+ toString(node.left, prefix + " |")  
-    						+ toString(node.right, prefix + "  ");
+                            + toString(node.left, prefix + " |")  
+                            + toString(node.right, prefix + "  ");
     	}
     	
     	return string;
