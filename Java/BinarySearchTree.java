@@ -263,10 +263,58 @@ public class BinarySearchTree<Key extends Comparable<Key>, Value>
     	
     	return max;
     }
+	
+	/**
+     * Returns the Lowest Common Ancestor of the two specified elements (if they exist) in the {@code BinarySearchTree}.
+     *
+     * @param node1 the first {@code Node}
+     * @param node2 the second {@code Node}
+     * @return the {@code Key} corresponding to the Lowest Common Ancestor {@code Node} of {@code node1} and {@code node2} (or {@code null} if no such {@code Node exists})
+     */
 	public Key lowestCommonAncestor(Key node1, Key node2)
 	{
 		Key lca = null;
+		if((node1 != null) && (node2 != null))
+		{
+			lca = lowestCommonAncestor(root, node1, node2);
+		}
 		
+		return lca;
+	}
+	
+	/**
+     * (Recursively) Returns the Lowest Common Ancestor of the two specified elements (if they exist) in the {@code BinarySearchTree} rooted at the specified {@code Node}.
+     *
+     * @param root the root {@code Node}
+     * @param node1 the first {@code Node}
+     * @param node2 the second {@code Node}
+     * @return the {@code Key} corresponding to the Lowest Common Ancestor {@code Node} of {@code node1} and {@code node2} (or {@code null} if no such {@code Node exists})
+     */
+	public Key lowestCommonAncestor(Node node, Key node1, Key node2)
+	{
+		Key lca = null;
+        if(node != null)
+        {
+	        if(node.key == node1 || node.key == node2)
+	        {
+	        	lca = node.key;
+	        }
+	        else
+	        {
+	        	Key left = lowestCommonAncestor(node.left, node1, node2);
+		        Key right = lowestCommonAncestor(node.right, node1, node2);
+		 
+		        if(left != null && right != null)
+		        {
+		        	lca = node.key;
+		        }
+		        else
+		        {
+		        	lca = (left == null) ? right : left;
+		        }
+	        }
+		}
+
 		return lca;
 	}
 
