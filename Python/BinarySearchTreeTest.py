@@ -5,39 +5,39 @@ def testConstructor():
     assert binarySearchTree.root == None
     
 def testSize():
-    binarySearchTree = BinarySearchTree()
-    assert binarySearchTree.size() == 0
-    binarySearchTree.put(5, 5)
-    assert binarySearchTree.size() == 1
-    binarySearchTree.put(15, 15)
-    assert binarySearchTree.size() == 2
-    binarySearchTree.put(10, 10)
-    assert binarySearchTree.size() == 3
+    bst = BinarySearchTree()
+    assert bst.size() == 0
+    bst.put(5, 5)
+    assert bst.size() == 1
+    bst.put(15, 15)
+    assert bst.size() == 2
+    bst.put(10, 10)
+    assert bst.size() == 3
 
 def testPut():
-    binarySearchTree = BinarySearchTree()
-    assert print(binarySearchTree) == "()"
-    binarySearchTree.put(7, 7)
-    binarySearchTree.put(8, 8)
-    binarySearchTree.put(3, 3)
-    binarySearchTree.put(1, 1)
-    binarySearchTree.put(2, 2)
-    binarySearchTree.put(6, 6)
-    binarySearchTree.put(4, 4)
-    binarySearchTree.put(5, 5)
-    assert print(binarySearchTree) == "(((()1(()2()))3((()4(()5()))6()))7(()8()))"
-    binarySearchTree.put(8, 10)
-    assert print(binarySearchTree) == "(((()1(()2()))3((()4(()5()))6()))7(()8()))"
+    bst = BinarySearchTree()
+    assert bst.__str__() == "()"
+    bst.put(7, 7)
+    bst.put(8, 8)
+    bst.put(3, 3)
+    bst.put(1, 1)
+    bst.put(2, 2)
+    bst.put(6, 6)
+    bst.put(4, 4)
+    bst.put(5, 5)
+    assert bst.__str__() == "(((()1(()2()))3((()4(()5()))6()))7(()8()))"
+    bst.put(8, 10)
+    assert bst.__str__() == "(((()1(()2()))3((()4(()5()))6()))7(()8()))"
 
 def testPrint():
-    binarySearchTree = BinarySearchTree()
-    assert print(binarySearchTree) == "()"
-    binarySearchTree.put(7, 7)
-    binarySearchTree.put(8, 8)
-    binarySearchTree.put(3, 3)
-    binarySearchTree.put(1, 1)
-    binarySearchTree.put(2, 2)
-    binarySearchTree.put(6, 6)
-    binarySearchTree.put(4, 4)
-    binarySearchTree.put(5, 5)
-    assert print(binarySearchTree) == "(((()1(()2()))3((()4(()5()))6()))7(()8()))"
+    bst = BinarySearchTree()
+    assert bst.__str__() == "()"
+    bst.put(7, 7)
+    bst.put(8, 8)
+    bst.put(3, 3)
+    bst.put(1, 1)
+    bst.put(2, 2)
+    bst.put(6, 6)
+    bst.put(4, 4)
+    bst.put(5, 5)
+    assert bst.__str__() == "(((()1(()2()))3((()4(()5()))6()))7(()8()))"
