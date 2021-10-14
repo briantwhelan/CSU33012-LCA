@@ -35,6 +35,10 @@ class BinarySearchTree:
                 node.value = value
             node.size = 1 + self.sizeR(node.left) + self.sizeR(node.right)
         return node
+    
+    def lca(self, node1, node2):
+        lca = None
+        return lca
 
     def __str__(self):
         keysInOrder = ""
