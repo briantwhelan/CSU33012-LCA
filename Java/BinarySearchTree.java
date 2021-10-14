@@ -295,7 +295,7 @@ public class BinarySearchTree<Key extends Comparable<Key>, Value>
         Key lca = null;
         if(node != null)
         {
-            if(node.key == node1 || node.key == node2)
+            if((node.key == node1) || (node.key == node2))
             {
                 lca = node.key;
             }
@@ -304,7 +304,7 @@ public class BinarySearchTree<Key extends Comparable<Key>, Value>
                 Key left = lowestCommonAncestor(node.left, node1, node2);
                 Key right = lowestCommonAncestor(node.right, node1, node2);
 		 
-                if(left != null && right != null)
+                if((left != null) && (right != null))
                 {
                     lca = node.key;
                 }
