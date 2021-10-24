@@ -1,3 +1,4 @@
+import java.util.HashSet;
 /*************************************************************************
  *  {@code DirectedGraph} class.
  *  Adapted from Sedgewick and Wayne's Algorithms Textbook.
@@ -16,7 +17,7 @@ public class DirectedGraph
 
     public DirectedGraph(int numberOfVertices) throws IllegalArgumentException
     {
-
+        this.numberOfVertices = numberOfVertices;
     }
 
     public void addEdge(int vertex1, int vertex2)
