@@ -109,7 +109,18 @@ public class DirectedGraph
 	@Override
     public String toString()
     {
-        return "";
+        String string =  getNumberOfVertices() + " vertices, " + getNumberOfEdges() + " edges\n";
+	    for(int vertex = 0; vertex < numberOfVertices; vertex++)
+	    {
+		    string += vertex + ": ";
+		    for(int adjacentVertex : getAdjacencyList(vertex))
+		    {
+		    	string += adjacentVertex + " ";
+		    }
+		    string += "\n";
+	    }
+	    
+	    return string;
     }
 }
 
