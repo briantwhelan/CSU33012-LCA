@@ -61,7 +61,11 @@ public class DirectedGraph
     public Iterable<Integer> getAdjacencyList(int vertex)
     {
     	Iterable<Integer> adjacencyList = null;	
-    	
+		if((vertex >= 0) && (vertex < numberOfVertices))
+    	{
+    		adjacencyList = adjacencyLists[vertex];
+    	}    
+	
 		return adjacencyList;
     }
 
