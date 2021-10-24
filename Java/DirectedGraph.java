@@ -30,6 +30,16 @@ public class DirectedGraph
         return 0;
     }
 
+    public int getNumberOfVertices()
+    {
+        return numberOfVertices;
+    }
+
+    public int getNumberOfEdges()
+    {
+        return numberOfEdges;
+    }
+
     public String toString()
     {
         return "";
