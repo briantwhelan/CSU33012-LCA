@@ -16,8 +16,8 @@ public class DirectedGraph
     private HashSet<Integer>[] adjacencyLists;
 
 	/**
-     * Create an empty directed graph with a particular number of vertices
-     * @param: number of vertices to be included in directed graph
+     * Creates an empty {@code DirectedGraph} with the specified number of vertices
+     * @param numberOfVertices the number of vertices to be included in the {@code DirectedGraph}
      */
     public DirectedGraph(int numberOfVertices) throws IllegalArgumentException
     {
@@ -36,7 +36,7 @@ public class DirectedGraph
     }
 
 	/**
-     * Add an edge to the directed graph
+     * Adds the directed edge between the two specified vertices to the {@code DirectedGraph}
      * 
      * @param vertex1: start vertex of edge to be added
      * @param vertex2: end vertex of edge to be added
@@ -50,6 +50,19 @@ public class DirectedGraph
 	    	adjacencyLists[vertex1].add(vertex2);
 	    	numberOfEdges++;
     	}
+    }
+
+	/**
+     * Gets the adjacency list for the specified vertex in the {@code DirectedGraph}
+     * 
+     * @param vertex the vertex of which the adjacency list is required
+     * @return the vertices adjacent to {@code vertex} in the {@code DirectedGraph}
+     */
+    public Iterable<Integer> getAdjacencyList(int vertex)
+    {
+    	Iterable<Integer> adjacencyList = null;	
+    	
+		return adjacencyList;
     }
 
 	/**

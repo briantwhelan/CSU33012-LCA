@@ -1,5 +1,7 @@
 import org.junit.Test;
 import static org.junit.Assert.assertEquals;
+import java.util.Arrays;
+import java.util.HashSet;
 /*************************************************************************
  *  {@code DirectedGraph} test class.
  *
@@ -49,7 +51,22 @@ public class DirectedGraphTest
     	graph.addEdge(1, 2);
     	assertEquals("Testing addEdge(int vertex1, int vertex2) - Adding a duplicate edge", 1, graph.getNumberOfEdges());     		     
     }
- 
+
+	/**
+     * Test getAdjacencyList(int vertex)
+     */
+    @Test
+    public void testGetAdjacencyList()
+    {
+    	DirectedGraph graph = new DirectedGraph(3);
+    	
+    	assertEquals("Testing getAdjacencyList(int vertex) - Getting adjacency matrix for an invalid vertex", null, graph.getAdjacencyList(4));
+    	assertEquals("Testing getAdjacencyList(int vertex) - Getting adjacency matrix for an invalid vertex", null, graph.getAdjacencyList(-1));
+    	assertEquals("Testing getAdjacencyList(int vertex) - Getting adjacency matrix for a valid vertex", new HashSet<Integer>(), graph.getAdjacencyList(0));
+    	graph.addEdge(0, 1);
+    	graph.addEdge(0, 2);
+    	assertEquals("Testing getAdjacencyList(int vertex) - Getting adjacency matrix for a valid vertex", new HashSet<Integer>(Arrays.asList(1, 2)), graph.getAdjacencyList(0));    
+    }
 
     /**
      * Test {@code lowestCommonAncestor(int vertex1, int vertex2)}
