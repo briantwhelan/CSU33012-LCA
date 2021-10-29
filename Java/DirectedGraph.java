@@ -14,6 +14,7 @@ public class DirectedGraph
     private final int numberOfVertices;
     private int numberOfEdges;
     private HashSet<Integer>[] adjacencyLists;
+    private int[] indegrees;
 
 	/**
      * Creates an empty {@code DirectedGraph} with the specified number of vertices
@@ -28,26 +29,45 @@ public class DirectedGraph
 		
 		this.numberOfVertices = numberOfVertices;
 		this.numberOfEdges = 0;
-		this.adjacencyLists = (HashSet<Integer>[]) new HashSet[numberOfVertices];
+		
+        this.adjacencyLists = (HashSet<Integer>[]) new HashSet[numberOfVertices];
 		for(int vertex = 0; vertex < numberOfVertices; vertex++)
 		{
-			adjacencyLists[vertex] = new HashSet<Integer>();
+			this.adjacencyLists[vertex] = new HashSet<Integer>();
 		}
+
+        this.indegrees = new int[numberOfVertices];
+        for(int vertex = 0; vertex < numberOfVertices; vertex++)
+		{
+			this.indegrees[vertex] = 0;
+		}
+    }
+
+	/**
+     * Checks whether the specified vertex is a valid vertex in the {@code DirectedGraph}
+     * 
+     * @param vertex the vertex to validate
+     * @return {@code true} if {@code vertex} is valid and {@code false} otherwise
+     */
+    private boolean isValidVertex(int vertex)
+    {
+        return ((vertex >= 0) && (vertex < numberOfVertices));
     }
 
 	/**
      * Adds the directed edge between the two specified vertices to the {@code DirectedGraph}
      * 
-     * @param vertex1: start vertex of edge to be added
-     * @param vertex2: end vertex of edge to be added
+     * @param vertex1 the initial vertex of the edge to be added
+     * @param vertex2 the terminal vertex of the edge to be added
      */
     public void addEdge(int vertex1, int vertex2)
     {
-		if((vertex1 >= 0) && (vertex1 < numberOfVertices)
-    		&& (vertex2 >= 0) && (vertex2 < numberOfVertices)
+		if(isValidVertex(vertex1)
+    		&& isValidVertex(vertex2)
     		&& (!adjacencyLists[vertex1].contains(vertex2)))
     	{
 	    	adjacencyLists[vertex1].add(vertex2);
+            indegrees[vertex2]++;
 	    	numberOfEdges++;
     	}
     }
@@ -56,12 +76,12 @@ public class DirectedGraph
      * Gets the adjacency list for the specified vertex in the {@code DirectedGraph}
      * 
      * @param vertex the vertex of which the adjacency list is required
-     * @return the vertices adjacent to {@code vertex} in the {@code DirectedGraph}
+     * @return the vertices adjacent to {@code vertex}
      */
     public Iterable<Integer> getAdjacencyList(int vertex)
     {
     	Iterable<Integer> adjacencyList = null;	
-		if((vertex >= 0) && (vertex < numberOfVertices))
+		if(isValidVertex(vertex))
     	{
     		adjacencyList = adjacencyLists[vertex];
     	}    
@@ -78,6 +98,10 @@ public class DirectedGraph
     public int getOutdegree(int vertex)
     {
         int outdegree = -1;
+        if(isValidVertex(vertex))
+        {
+            outdegree = adjacencyLists[vertex].size();
+        }
 
         return outdegree;
     }
@@ -91,6 +115,10 @@ public class DirectedGraph
     public int getIndegree(int vertex)
     {
         int indegree = -1;
+        if(isValidVertex(vertex))
+        {
+            indegree = indegrees[vertex];
+        }
 
         return indegree;
     }
