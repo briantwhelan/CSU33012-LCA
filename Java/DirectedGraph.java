@@ -4,7 +4,7 @@ import java.util.HashSet;
  *  Adapted from Sedgewick and Wayne's Algorithms Textbook.
  *  @see <a href="https://algs4.cs.princeton.edu/">Algorithms Textbook</a>
  *
- *  @version 24/10/21
+ *  @version 29/10/21
  *
  *  @author Brian Whelan
  *
@@ -67,6 +67,32 @@ public class DirectedGraph
     	}    
 	
 		return adjacencyList;
+    }
+
+	/**
+     * Gets the outdegree of the specified vertex in the {@code DirectedGraph}
+     * 
+     * @param vertex the vertex of which the outdegree is required
+     * @return the outdegree of {@code vertex}
+     */
+    public int getOutdegree(int vertex)
+    {
+        int outdegree = -1;
+
+        return outdegree;
+    }
+
+	/**
+     * Gets the indegree of the specified vertex in the {@code DirectedGraph}
+     * 
+     * @param vertex the vertex of which the indegree is required
+     * @return the indegree of {@code vertex}
+     */
+    public int getIndegree(int vertex)
+    {
+        int indegree = -1;
+
+        return indegree;
     }
 
 	/**

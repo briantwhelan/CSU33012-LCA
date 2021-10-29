@@ -5,7 +5,7 @@ import java.util.HashSet;
 /*************************************************************************
  *  {@code DirectedGraph} test class.
  *
- *  @version 24/10/21
+ *  @version 29/10/21
  *
  *  @author Brian Whelan
  *
@@ -53,7 +53,7 @@ public class DirectedGraphTest
     }
 
 	/**
-     * Test getAdjacencyList(int vertex)
+     * Test {@code getAdjacencyList(int vertex)}
      */
     @Test
     public void testGetAdjacencyList()
@@ -66,6 +66,38 @@ public class DirectedGraphTest
     	graph.addEdge(0, 1);
     	graph.addEdge(0, 2);
     	assertEquals("Testing getAdjacencyList(int vertex) - Getting adjacency matrix for a valid vertex", new HashSet<Integer>(Arrays.asList(1, 2)), graph.getAdjacencyList(0));    
+    }
+
+	/**
+     * Test {@code getOutdegree(int vertex)}
+     */
+    @Test
+    public void testGetOutdegree()
+    {
+    	DirectedGraph graph = new DirectedGraph(3);
+    	
+    	assertEquals("Testing getOutdegree(int vertex) - Getting the outdegree for an invalid vertex", -1, graph.getOutdegree(4));
+    	assertEquals("Testing getOutdegree(int vertex) - Getting the outdegree for an invalid vertex", -1, graph.getOutdegree(-1));
+    	assertEquals("Testing getOutdegree(int vertex) - Getting the outdegree for a valid vertex", 0, graph.getOutdegree(0));
+    	graph.addEdge(0, 1);
+    	graph.addEdge(0, 2);
+    	assertEquals("Testing getOutdegree(int vertex) - Getting the outdegree for a valid vertex", 2, graph.getOutdegree(0));    
+    }
+
+    /**
+     * Test {@code getIndegree(int vertex)}
+     */
+    @Test
+    public void testGetIndegree()
+    {
+    	DirectedGraph graph = new DirectedGraph(3);
+    	
+    	assertEquals("Testing getIndegree(int vertex) - Getting the indegree for an invalid vertex", -1, graph.getIndegree(4));
+    	assertEquals("Testing getIndegree(int vertex) - Getting the indegree for an invalid vertex", -1, graph.getIndegree(-1));
+    	assertEquals("Testing getIndegree(int vertex) - Getting the indegree for a valid vertex", 0, graph.getIndegree(0));
+    	graph.addEdge(0, 2);
+    	graph.addEdge(1, 2);
+    	assertEquals("Testing getIndegree(int vertex) - Getting the indegree for a valid vertex", 2, graph.getIndegree(2));    
     }
 
     /**
