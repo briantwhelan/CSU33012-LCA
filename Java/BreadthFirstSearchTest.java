@@ -11,12 +11,29 @@ import static org.junit.Assert.assertEquals;
 public class BreadthFirstSearchTest
 {   	
     /**
-     * Test constructor
+     * Test constructor for valid inputs
      */
     @Test
     public void testConstructor()
     {
-        new BreadthFirstSearch(new DirectedGraph(0), 0);
+        DirectedGraph graph = new DirectedGraph(3);
+        graph.addEdge(0, 1);
+        graph.addEdge(0, 2);
+
+        new BreadthFirstSearch(graph, 0);
+    }
+
+	/**
+     * Test constructor for invalid inputs
+     */
+    @Test(expected = IllegalArgumentException.class)
+    public void testConstructorException()
+    {
+        DirectedGraph graph = new DirectedGraph(3);
+        graph.addEdge(0, 1);
+        graph.addEdge(0, 2);
+
+        new BreadthFirstSearch(graph, -1);
     }
 }
 

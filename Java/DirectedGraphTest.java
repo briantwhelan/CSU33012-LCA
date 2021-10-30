@@ -13,7 +13,7 @@ import java.util.HashSet;
 public class DirectedGraphTest
 {   	
     /**
-     * Test {@code DirectedGraphTest} 
+     * Test constructor for valid input 
      */
     @Test
     public void testConstructor()
@@ -22,14 +22,28 @@ public class DirectedGraphTest
     }
 
 	/**
-     * Test constructor for invalid inputs
+     * Test constructor for invalid input
      */
     @Test(expected = IllegalArgumentException.class)
     public void testConstructorException()
     {
     	new DirectedGraph(-1);
     }
-
+    
+    /**
+     * Test {@code isValidVertex(int vertex)} 
+     */
+    @Test
+    public void testIsValidVertex()
+    {
+        DirectedGraph graph = new DirectedGraph(2);
+        
+        assertEquals("Testing isValidVertex(int vertex) - Checking for an invalid vertex", false, graph.isValidVertex(2));
+        assertEquals("Testing isValidVertex(int vertex) - Checking for an invalid vertex", false, graph.isValidVertex(-1)); 
+        assertEquals("Testing isValidVertex(int vertex) - Checking for a valid vertex", true, graph.isValidVertex(0));
+        assertEquals("Testing isValidVertex(int vertex) - Checking for a valid vertex", true, graph.isValidVertex(1));
+    }
+	
     /**
      * Test {@code addEdge(int vertex1, int vertex2)} 
      */

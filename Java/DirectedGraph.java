@@ -18,13 +18,14 @@ public class DirectedGraph
 
 	/**
      * Creates an empty {@code DirectedGraph} with the specified number of vertices
+     *
      * @param numberOfVertices the number of vertices to be included in the {@code DirectedGraph}
      */
     public DirectedGraph(int numberOfVertices) throws IllegalArgumentException
     {
        if(numberOfVertices < 0)
 		{
-			throw new IllegalArgumentException("Number of vertices must be positive");
+			throw new IllegalArgumentException("The number of vertices must be positive");
 		}
 		
 		this.numberOfVertices = numberOfVertices;
@@ -49,7 +50,7 @@ public class DirectedGraph
      * @param vertex the vertex to validate
      * @return {@code true} if {@code vertex} is valid and {@code false} otherwise
      */
-    private boolean isValidVertex(int vertex)
+    public boolean isValidVertex(int vertex)
     {
         return ((vertex >= 0) && (vertex < numberOfVertices));
     }
