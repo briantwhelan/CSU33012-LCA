@@ -1,3 +1,5 @@
+import java.util.LinkedList;
+import java.util.Queue;
 import java.util.Stack;
 /*************************************************************************
  *  {@code BreadthFirstSearch} class.
@@ -11,6 +13,9 @@ public class BreadthFirstSearch
 {
     private DirectedGraph graph;
     private final int sourceVertex;
+    private boolean[] visited;
+    private int[] edgeTo;
+    private int[] depthTo;
 
 	/**
      * Performs BreadthFirstSearch from the specified source vertex in the specified {@code DirectedGraph}
@@ -27,6 +32,9 @@ public class BreadthFirstSearch
 
         this.graph = graph;
         this.sourceVertex = sourceVertex;
+        this.visited = new boolean[graph.getNumberOfVertices()];
+        this.edgeTo = new int[graph.getNumberOfVertices()];
+        this.depthTo = new int[graph.getNumberOfVertices()];
 
         performBreadthFirstSearch(graph, sourceVertex);
     }
@@ -39,6 +47,24 @@ public class BreadthFirstSearch
      */
     private void performBreadthFirstSearch(DirectedGraph graph, int sourceVertex)
     {
+        Queue<Integer> queue = new LinkedList<Integer>();
+        visited[sourceVertex] = true;
+        depthTo[sourceVertex] = 0;
+        queue.add(sourceVertex);
+        while(!queue.isEmpty())
+        {
+            int currentVertex = queue.remove();
+            for(int adjacentVertex : graph.getAdjacencyList(currentVertex))
+            {
+                if(!visited[adjacentVertex])
+                {
+                    visited[adjacentVertex] = true;
+                    edgeTo[adjacentVertex] = currentVertex;
+                    depthTo[adjacentVertex] = depthTo[currentVertex] + 1;
+                    queue.add(adjacentVertex);
+                }
+            }
+        }
     }
 
     /**
