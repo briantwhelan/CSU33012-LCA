@@ -76,6 +76,10 @@ public class BreadthFirstSearch
     public boolean hasPathTo(int vertex)
     {
         boolean hasPathTo = false;
+        if(graph.isValidVertex(vertex))
+        {
+            hasPathTo = visited[vertex];
+        }
 
         return hasPathTo;
     }
@@ -89,6 +93,15 @@ public class BreadthFirstSearch
     public Iterable<Integer> getPathTo(int vertex)
     {
         Stack<Integer> path = null;
+        if(graph.isValidVertex(vertex) && hasPathTo(vertex))
+        {
+            path = new Stack<Integer>();
+            for(int currentVertex = vertex; currentVertex != sourceVertex; currentVertex = edgeTo[currentVertex])
+            {
+                path.push(currentVertex);
+            }
+            path.push(sourceVertex);
+        }
 
         return path;        
     }
@@ -102,6 +115,10 @@ public class BreadthFirstSearch
     public int getDepthTo(int vertex)
     {
         int depth = Integer.MAX_VALUE;
+        if(graph.isValidVertex(vertex))
+        {
+            depth = depthTo[vertex];
+        }
 
         return depth;
     } 
