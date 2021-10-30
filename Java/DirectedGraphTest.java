@@ -5,7 +5,7 @@ import java.util.HashSet;
 /*************************************************************************
  *  {@code DirectedGraph} test class.
  *
- *  @version 29/10/21
+ *  @version 30/10/21
  *
  *  @author Brian Whelan
  *
@@ -165,8 +165,8 @@ public class DirectedGraphTest
         graph.addEdge(6, 5);
         graph.addEdge(6, 7);
         graph.addEdge(7, 8);
-        assertEquals("Testing lowestCommonAncestor(int vertex1, int vertex2) - Getting LCA on a non-empty graph", 1, graph.lowestCommonAncestor(4, 7)); //should be 1 and 2
-        assertEquals("Testing lowestCommonAncestor(int vertex1, int vertex2) - Getting LCA on a non-empty graph", 1, graph.lowestCommonAncestor(7, 4)); //should be 1 and 2
+        assertEquals("Testing lowestCommonAncestor(int vertex1, int vertex2) - Getting LCA on a non-empty graph", 2, graph.lowestCommonAncestor(4, 7)); //should be 1 and 2
+        assertEquals("Testing lowestCommonAncestor(int vertex1, int vertex2) - Getting LCA on a non-empty graph", 2, graph.lowestCommonAncestor(7, 4)); //should be 1 and 2
     }       
 
     /**

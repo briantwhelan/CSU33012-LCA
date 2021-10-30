@@ -121,6 +121,17 @@ public class BreadthFirstSearch
         }
 
         return depth;
+    }
+
+    /**
+     * Gets the {@code sourceVertex} in the {@code BreadthFirstSearch}}
+     * 
+     * @return the {@code sourceVertex} in the {@code BreadthFirstSearch}
+     */
+    public int getSourceVertex()
+    {
+        return sourceVertex;
+    }
     } 
 }
 

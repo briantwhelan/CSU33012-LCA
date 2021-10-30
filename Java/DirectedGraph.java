@@ -1,10 +1,11 @@
 import java.util.HashSet;
+import java.util.ArrayList;
 /*************************************************************************
  *  {@code DirectedGraph} class.
  *  Adapted from Sedgewick and Wayne's Algorithms Textbook.
  *  @see <a href="https://algs4.cs.princeton.edu/">Algorithms Textbook</a>
  *
- *  @version 29/10/21
+ *  @version 30/10/21
  *
  *  @author Brian Whelan
  *
@@ -133,10 +134,67 @@ public class DirectedGraph
      */
     public int lowestCommonAncestor(int vertex1, int vertex2)
     {
-        return 0;
+        int lca = -1;
+        if(isValidVertex(vertex1) && isValidVertex(vertex2))
+        { 
+            //Perform bfs on every vertex
+            BreadthFirstSearch[] bfss = new BreadthFirstSearch[numberOfVertices];
+            for(int vertex = 0; vertex < numberOfVertices; vertex++)
+            {
+                bfss[vertex] = new BreadthFirstSearch(this, vertex);
+            }
+
+            //Find ancestors of two vertices
+            ArrayList<Integer> vertex1Ancestors = new ArrayList<Integer>();
+            ArrayList<Integer> vertex2Ancestors = new ArrayList<Integer>();
+            for(BreadthFirstSearch currentBfs : bfss)
+            {
+                if(currentBfs.hasPathTo(vertex1))
+                {
+                    vertex1Ancestors.add(currentBfs.getSourceVertex());
+                }
+                
+                if(currentBfs.hasPathTo(vertex2))
+                {
+                    vertex2Ancestors.add(currentBfs.getSourceVertex());
+                }
+            }
+
+            //Find common ancestors
+            ArrayList<Integer> commonAncestors = new ArrayList<Integer>();
+            for(int index = 0; index < vertex1Ancestors.size(); index++)
+            {
+                int currentAncestor = vertex1Ancestors.get(index);
+                if(vertex2Ancestors.contains(currentAncestor))
+                {
+                    commonAncestors.add(currentAncestor);
+                }
+            }
+
+            //Vertices in subgraph containing common ancestors with an outdegree of 0 are LCA(s)
+            for(int currentCommonAncestor : commonAncestors)
+            {
+                int outdegree = getOutdegree(currentCommonAncestor);
+                Iterable<Integer> adjacencyList = adjacencyLists[currentCommonAncestor];
+                for(int currentVertex : adjacencyList)
+                {
+                    if(!commonAncestors.contains(currentVertex))
+                    {
+                        outdegree--;
+                    }
+                }
+
+                if(outdegree == 0)
+                {
+                    lca = currentCommonAncestor;
+                } 
+            }
+        }
+
+        return lca;
     }
 
-	 /**
+    /**
      * Gets the number of vertices in the {@code DirectedGraph}
      * 
      * @return the number of vertices in the {@code DirectedGraph}
@@ -146,7 +204,7 @@ public class DirectedGraph
         return numberOfVertices;
     }
 
-	 /**
+	/**
      * Gets the number of edges in the {@code DirectedGraph}
      * 
      * @return the number of edges in the {@code DirectedGraph}
