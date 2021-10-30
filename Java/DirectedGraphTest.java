@@ -151,6 +151,22 @@ public class DirectedGraphTest
         assertEquals("Testing lowestCommonAncestor(int vertex1, int vertex2) - Getting LCA on a non-empty graph", 6, graph.lowestCommonAncestor(7, 2));
         assertEquals("Testing lowestCommonAncestor(int vertex1, int vertex2) - Getting LCA on a non-empty graph", 6, graph.lowestCommonAncestor(1, 7));
         assertEquals("Testing lowestCommonAncestor(int vertex1, int vertex2) - Getting LCA on a non-empty graph", 2, graph.lowestCommonAncestor(1, 4));
+    
+        graph = new DirectedGraph(9);
+
+        graph.addEdge(0, 1);
+        graph.addEdge(0, 2);
+        graph.addEdge(1, 4);
+        graph.addEdge(1, 6);
+        graph.addEdge(2, 3);
+        graph.addEdge(2, 4);
+        graph.addEdge(2, 6);
+        graph.addEdge(3, 6);
+        graph.addEdge(6, 5);
+        graph.addEdge(6, 7);
+        graph.addEdge(7, 8);
+        assertEquals("Testing lowestCommonAncestor(int vertex1, int vertex2) - Getting LCA on a non-empty graph", 1, graph.lowestCommonAncestor(4, 7)); //should be 1 and 2
+        assertEquals("Testing lowestCommonAncestor(int vertex1, int vertex2) - Getting LCA on a non-empty graph", 1, graph.lowestCommonAncestor(7, 4)); //should be 1 and 2
     }       
 
     /**
