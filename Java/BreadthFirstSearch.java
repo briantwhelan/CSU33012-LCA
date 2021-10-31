@@ -131,7 +131,6 @@ public class BreadthFirstSearch
     public int getSourceVertex()
     {
         return sourceVertex;
-    }
     } 
 }
 
