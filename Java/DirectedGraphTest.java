@@ -1,11 +1,12 @@
 import org.junit.Test;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertArrayEquals;
 import java.util.Arrays;
 import java.util.HashSet;
 /*************************************************************************
  *  {@code DirectedGraph} test class.
  *
- *  @version 30/10/21
+ *  @version 31/10/21
  *
  *  @author Brian Whelan
  *
@@ -122,9 +123,9 @@ public class DirectedGraphTest
     {
         DirectedGraph graph = new DirectedGraph(4);
         
-        assertEquals("Testing lowestCommonAncestor(int vertex1, int vertex2) - Getting LCA of invalid vertex", -1, graph.lowestCommonAncestor(-1, 2));    
-        assertEquals("Testing lowestCommonAncestor(int vertex1, int vertex2) - Getting LCA of invalid vertex", -1, graph.lowestCommonAncestor(3, 8));
-        assertEquals("Testing lowestCommonAncestor(int vertex1, int vertex2) - Getting LCA on an empty graph", -1, graph.lowestCommonAncestor(0, 2));
+        assertArrayEquals("Testing lowestCommonAncestor(int vertex1, int vertex2) - Getting LCA of invalid vertex", null, graph.lowestCommonAncestor(-1, 2));    
+        assertArrayEquals("Testing lowestCommonAncestor(int vertex1, int vertex2) - Getting LCA of invalid vertex", null, graph.lowestCommonAncestor(3, 8));
+        assertArrayEquals("Testing lowestCommonAncestor(int vertex1, int vertex2) - Getting LCA on an empty graph", null, graph.lowestCommonAncestor(0, 2));
         graph.addEdge(0, 1);    //      _0_
         graph.addEdge(1, 2);    //         \
         graph.addEdge(2, 3);    //          1
@@ -132,8 +133,8 @@ public class DirectedGraphTest
                                 //            2
                                 //             \
                                 //              3
-        assertEquals("Testing lowestCommonAncestor(int vertex1, int vertex2) - Getting LCA on a non-empty graph", 1, graph.lowestCommonAncestor(1, 3));
-        assertEquals("Testing lowestCommonAncestor(int vertex1, int vertex2) - Getting LCA on a non-empty graph", 2, graph.lowestCommonAncestor(2, 3));
+        assertArrayEquals("Testing lowestCommonAncestor(int vertex1, int vertex2) - Getting LCA on a non-empty graph", new int[]{1}, graph.lowestCommonAncestor(1, 3));
+        assertArrayEquals("Testing lowestCommonAncestor(int vertex1, int vertex2) - Getting LCA on a non-empty graph", new int[]{2}, graph.lowestCommonAncestor(2, 3));
     
 
         graph = new DirectedGraph(8);
@@ -147,10 +148,10 @@ public class DirectedGraphTest
         graph.addEdge(3, 4);    //   1 3
                                 //      \
                                 //       4
-        assertEquals("Testing lowestCommonAncestor(int vertex1, int vertex2) - Getting LCA on a non-empty graph", 6, graph.lowestCommonAncestor(2, 7));
-        assertEquals("Testing lowestCommonAncestor(int vertex1, int vertex2) - Getting LCA on a non-empty graph", 6, graph.lowestCommonAncestor(7, 2));
-        assertEquals("Testing lowestCommonAncestor(int vertex1, int vertex2) - Getting LCA on a non-empty graph", 6, graph.lowestCommonAncestor(1, 7));
-        assertEquals("Testing lowestCommonAncestor(int vertex1, int vertex2) - Getting LCA on a non-empty graph", 2, graph.lowestCommonAncestor(1, 4));
+        assertArrayEquals("Testing lowestCommonAncestor(int vertex1, int vertex2) - Getting LCA on a non-empty graph", new int[]{6}, graph.lowestCommonAncestor(2, 7));
+        assertArrayEquals("Testing lowestCommonAncestor(int vertex1, int vertex2) - Getting LCA on a non-empty graph", new int[]{6}, graph.lowestCommonAncestor(7, 2));
+        assertArrayEquals("Testing lowestCommonAncestor(int vertex1, int vertex2) - Getting LCA on a non-empty graph", new int[]{6}, graph.lowestCommonAncestor(1, 7));
+        assertArrayEquals("Testing lowestCommonAncestor(int vertex1, int vertex2) - Getting LCA on a non-empty graph", new int[]{2}, graph.lowestCommonAncestor(1, 4));
     
         graph = new DirectedGraph(9);
 
@@ -165,8 +166,8 @@ public class DirectedGraphTest
         graph.addEdge(6, 5);
         graph.addEdge(6, 7);
         graph.addEdge(7, 8);
-        assertEquals("Testing lowestCommonAncestor(int vertex1, int vertex2) - Getting LCA on a non-empty graph", 2, graph.lowestCommonAncestor(4, 7)); //should be 1 and 2
-        assertEquals("Testing lowestCommonAncestor(int vertex1, int vertex2) - Getting LCA on a non-empty graph", 2, graph.lowestCommonAncestor(7, 4)); //should be 1 and 2
+        assertArrayEquals("Testing lowestCommonAncestor(int vertex1, int vertex2) - Getting LCA on a non-empty graph", new int[]{1, 2}, graph.lowestCommonAncestor(4, 7)); 
+        assertArrayEquals("Testing lowestCommonAncestor(int vertex1, int vertex2) - Getting LCA on a non-empty graph", new int[]{1, 2}, graph.lowestCommonAncestor(7, 4)); 
     }       
 
     /**

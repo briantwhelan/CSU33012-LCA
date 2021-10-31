@@ -5,7 +5,7 @@ import java.util.ArrayList;
  *  Adapted from Sedgewick and Wayne's Algorithms Textbook.
  *  @see <a href="https://algs4.cs.princeton.edu/">Algorithms Textbook</a>
  *
- *  @version 30/10/21
+ *  @version 31/10/21
  *
  *  @author Brian Whelan
  *
@@ -130,11 +130,11 @@ public class DirectedGraph
      *
      * @param vertex1 the first vertex
      * @param vertex2 the second vertex
-     * @return the {@code int} corresponding to the Lowest Common Ancestor vertex of {@code vertex1} and {@code vertex2} (or {@code null} if no such vertex exists)
+     * @return an array containing the Lowest Common Ancestor(s) of {@code vertex1} and {@code vertex2} (or {@code null} if no such vertex exists)
      */
-    public int lowestCommonAncestor(int vertex1, int vertex2)
+    public int[] lowestCommonAncestor(int vertex1, int vertex2)
     {
-        int lca = -1;
+        ArrayList<Integer> lcas = new ArrayList<Integer>();
         if(isValidVertex(vertex1) && isValidVertex(vertex2))
         { 
             //Perform bfs on every vertex
@@ -186,12 +186,24 @@ public class DirectedGraph
 
                 if(outdegree == 0)
                 {
-                    lca = currentCommonAncestor;
+                    lcas.add(currentCommonAncestor);
                 } 
             }
         }
 
-        return lca;
+        //Return array of LCA(s)
+        int[] result = null;
+        Object[] temp = lcas.toArray();
+        if(temp.length > 0)
+        {
+            result = new int[temp.length];
+            for(int index = 0; index < temp.length; index++)
+            {
+                result[index] = (int)temp[index];
+            }
+        }
+
+        return result;
     }
 
     /**
