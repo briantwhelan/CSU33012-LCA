@@ -4,7 +4,7 @@ import java.util.Stack;
 /*************************************************************************
  *  {@code BreadthFirstSearch} class.
  *  
- *  @version 30/10/21
+ *  @version 31/10/21
  *
  *  @author Brian Whelan
  *
@@ -35,6 +35,11 @@ public class BreadthFirstSearch
         this.visited = new boolean[graph.getNumberOfVertices()];
         this.edgeTo = new int[graph.getNumberOfVertices()];
         this.depthTo = new int[graph.getNumberOfVertices()];
+        for(int vertex = 0; vertex < graph.getNumberOfVertices(); vertex++)
+        {
+            depthTo[vertex] = Integer.MAX_VALUE;
+        }
+
 
         performBreadthFirstSearch(graph, sourceVertex);
     }
@@ -114,7 +119,7 @@ public class BreadthFirstSearch
      */
     public int getDepthTo(int vertex)
     {
-        int depth = Integer.MAX_VALUE;
+        int depth = -1;
         if(graph.isValidVertex(vertex))
         {
             depth = depthTo[vertex];

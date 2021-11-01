@@ -4,7 +4,7 @@ import java.util.Stack;
 /*************************************************************************
  *  {@code BreadthFirstSearch} test class.
  *
- *  @version 30/10/21
+ *  @version 31/10/21
  *
  *  @author Brian Whelan
  *
@@ -57,16 +57,17 @@ public class BreadthFirstSearchTest
     @Test
     public void testGetPathTo()
     {
-        DirectedGraph graph = new DirectedGraph(3);
+        DirectedGraph graph = new DirectedGraph(4);
         graph.addEdge(0, 1);
+        graph.addEdge(1, 2);
         BreadthFirstSearch bfs = new BreadthFirstSearch(graph, 0);
         
         Stack<Integer> expectedPath = new Stack<Integer>();
         expectedPath.push(2);
         expectedPath.push(1);
         expectedPath.push(0);
-        assertEquals("Testing getPathTo(int vertex) - Getting an invalid path", null, bfs.getPathTo(2));
-        assertEquals("Testing getPathTo(int vertex) - Getting a valid path", expectedPath, bfs.getPathTo(1));
+        assertEquals("Testing getPathTo(int vertex) - Getting an invalid path", null, bfs.getPathTo(3));
+        assertEquals("Testing getPathTo(int vertex) - Getting a valid path", expectedPath, bfs.getPathTo(2));
     }
 
     /**
@@ -80,7 +81,8 @@ public class BreadthFirstSearchTest
         graph.addEdge(1, 2);
         BreadthFirstSearch bfs = new BreadthFirstSearch(graph, 0);
 
-        assertEquals("Testing hasDepthTo(int vertex) - Getting an invalid depth", -1, bfs.getDepthTo(3));
+        assertEquals("Testing hasDepthTo(int vertex) - Getting depth for an ivalid vertex", -1, bfs.getDepthTo(-1));
+        assertEquals("Testing hasDepthTo(int vertex) - Getting an invalid depth", Integer.MAX_VALUE, bfs.getDepthTo(3));
         assertEquals("Testing hasDepthTo(int vertex) - Getting a valid depth", 1, bfs.getDepthTo(1));
         assertEquals("Testing hasDepthTo(int vertex) - Getting a valid depth", 2, bfs.getDepthTo(2));
     }
